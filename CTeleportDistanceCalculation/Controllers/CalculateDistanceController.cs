@@ -28,7 +28,14 @@ namespace CTeleportDistanceCalculation.Controllers
         {
             var result = await _distanceCalculationService.GetDistanceAsync(distanceRequest);
 
-            return Ok(result);
+            if (result.ResponseStatus == Domain.Enums.Status.Success)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
         }
     }
 }
